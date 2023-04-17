@@ -4,7 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductoController;
 use App\Http\Controllers\Api\ProveedorController;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +22,21 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Productos
-Route::resource('/productos',ProductoController::class);
-Route::get('/productos/{id}', 'ProductoController@show');
-Route::put('/productos/{id}', 'ProductosController@update');
+//register
+Route::post('/register',[App\Http\Controllers\Api\RegisterController::class, 'register']);
 
-//Proveedores
-Route::resource('/proveedors',ProveedorController::class);
-Route::get('/proveedors/{id}', 'ProveedorController@show');
-Route::put('/proveedors/{id}', 'ProveedorController@update');
+//login
+Route::post('/login',[App\Http\Controllers\Api\LoginController::class, 'login']);
 
-//Auth
-Route::post('register',[AuthController::class]);
+Route::middleware(['auth:sanctum'])->group(function(){
+    //Productos
+    Route::resource('/productos',ProductoController::class);
+    Route::get('/productos/{id}', 'ProductoController@show');
+    Route::put('/productos/{id}', 'ProductosController@update');
+
+    //Proveedores
+    Route::resource('/proveedors',ProveedorController::class);
+    Route::get('/proveedors/{id}', 'ProveedorController@show');
+    Route::put('/proveedors/{id}', 'ProveedorController@update');
+});
+

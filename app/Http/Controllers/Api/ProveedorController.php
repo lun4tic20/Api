@@ -8,11 +8,7 @@ use App\Http\Controllers\Controller;
 
 class ProveedorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $proveedors = Proveedor::all();
@@ -20,11 +16,6 @@ class ProveedorController extends Controller
         return response()->json(['proveedor' => $proveedors]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $validated = $request->validated([
@@ -37,12 +28,6 @@ class ProveedorController extends Controller
         return response()->json(['proveedor' => $proveedor], 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $proveedor = new Proveedor;
@@ -57,35 +42,11 @@ class ProveedorController extends Controller
         return response()->json($data);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Proveedor  $proveedor
-     * @return \Illuminate\Http\Response
-     */
     public function show(Proveedor $proveedor)
     {
         return response()->json($proveedor);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Proveedor  $proveedor
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Proveedor $proveedor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Proveedor  $proveedor
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Proveedor $proveedor)
     {
         $proveedor->nombre = $request->nombre;
@@ -100,12 +61,6 @@ class ProveedorController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Proveedor  $proveedor
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Proveedor $proveedor)
     {
         $proveedor->delete();
